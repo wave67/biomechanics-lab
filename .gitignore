@@ -1,0 +1,37 @@
+﻿# Dependencies
+node_modules/
+dist/
+__pycache__/
+*.pyc
+
+# Local data
+backend/*.db
+backend/*.sqlite
+storage/reports/*.pptx
+storage/reports/*.pdf
+*.log
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Temporary
+tmp/
+temp/
+work/*.py
+write_*.py
+
+# Project temp files
+PLACEHOLDER/
+serve.py
+test_minimal.py
+seed_data.py
+write_*.py
+start.ps1

@@ -89,7 +89,7 @@ const FilesPage: React.FC = () => {
     { title: '上传人员', dataIndex: 'uploader', key: 'uploader', width: 100 },
     { title: '上传时间', dataIndex: 'upload_time', key: 'time', width: 160, render: (t: string) => t ? formatDate(t) : '-' },
     {
-      title: '操作', key: 'action', width: 130, fixed: 'right',
+      title: '操作', key: 'action', width: 130, fixed: 'right' as const,
       render: (_: unknown, record: TestFile) => (
         <Space>
           <Tooltip title="预览"><Button type="link" size="small" icon={<EyeOutlined />} onClick={() => handlePreview(record)} /></Tooltip>

@@ -144,7 +144,7 @@ async function route(method: string, url: string, data?: any, params?: Record<st
         if (params?.priority) items = items.filter(t => t.priority === params.priority);
         if (params?.due_date) items = items.filter(t => t.due_time && String(t.due_time).startsWith(params.due_date));
         items.sort((a, b) => (b.created_at || '').localeCompare(a.created_at || ''));
-        return makeResponse(paginate(items, params));
+        return makeResponse(paginate(items, params || {}));
       }
       if (method === 'POST') {
         const item = { ...data, id: nextId(tasks), created_at: now(), updated_at: now() };
@@ -183,7 +183,7 @@ async function route(method: string, url: string, data?: any, params?: Record<st
         if (params?.status) items = items.filter(p => p.status === params.status);
         if (params?.brand_name) items = items.filter(p => String(p.brand_name || '').includes(params.brand_name));
         items.sort((a, b) => (b.created_at || '').localeCompare(a.created_at || ''));
-        return makeResponse(paginate(items, params));
+        return makeResponse(paginate(items, params || {}));
       }
       if (method === 'POST') {
         const item = { ...data, id: nextId(projects), created_at: now(), updated_at: now() };
@@ -220,7 +220,7 @@ async function route(method: string, url: string, data?: any, params?: Record<st
         let items = [...samples];
         if (params?.status) items = items.filter(s => s.status === params.status);
         if (params?.brand) items = items.filter(s => String(s.brand || '').includes(params.brand));
-        return makeResponse(paginate(items, params));
+        return makeResponse(paginate(items, params || {}));
       }
       if (method === 'POST') {
         const item = { ...data, id: nextId(samples), created_at: now(), updated_at: now() };
@@ -258,7 +258,7 @@ async function route(method: string, url: string, data?: any, params?: Record<st
       if (method === 'GET') {
         let filtered = [...items];
         if (params?.gender) filtered = filtered.filter(p => p.gender === params.gender);
-        return makeResponse(paginate(filtered, params));
+        return makeResponse(paginate(filtered, params || {}));
       }
       if (method === 'POST') {
         const item = { ...data, id: nextId(items), created_at: now(), updated_at: now() };
@@ -281,7 +281,7 @@ async function route(method: string, url: string, data?: any, params?: Record<st
       if (method === 'GET') {
         let filtered = [...items];
         if (params?.status) filtered = filtered.filter(e => e.status === params.status);
-        return makeResponse(paginate(filtered, params));
+        return makeResponse(paginate(filtered, params || {}));
       }
       if (method === 'POST') {
         const item = { ...data, id: nextId(items), created_at: now(), updated_at: now() };
@@ -304,7 +304,7 @@ async function route(method: string, url: string, data?: any, params?: Record<st
       if (method === 'GET') {
         let filtered = [...items];
         if (params?.test_type) filtered = filtered.filter(m => m.test_type === params.test_type);
-        return makeResponse(paginate(filtered, params));
+        return makeResponse(paginate(filtered, params || {}));
       }
       if (method === 'POST') {
         const item = { ...data, id: nextId(items), created_at: now() };
@@ -327,7 +327,7 @@ async function route(method: string, url: string, data?: any, params?: Record<st
       if (method === 'GET') {
         let filtered = [...items];
         if (params?.is_active !== undefined) filtered = filtered.filter(p => p.is_active === params.is_active);
-        return makeResponse(paginate(filtered, params));
+        return makeResponse(paginate(filtered, params || {}));
       }
       if (method === 'POST') {
         const item = { ...data, id: nextId(items), created_at: now(), updated_at: now() };
@@ -351,7 +351,7 @@ async function route(method: string, url: string, data?: any, params?: Record<st
         let filtered = [...items];
         if (params?.project_id) filtered = filtered.filter(d => d.project_id === Number(params.project_id));
         if (params?.test_type) filtered = filtered.filter(d => d.test_type === params.test_type);
-        return makeResponse(paginate(filtered, params));
+        return makeResponse(paginate(filtered, params || {}));
       }
       if (method === 'POST') {
         const item = { ...data, id: nextId(items), created_at: now(), updated_at: now() };
@@ -376,7 +376,7 @@ async function route(method: string, url: string, data?: any, params?: Record<st
     if (segments.length === 1 && method === 'GET') {
       let filtered = [...items];
       if (params?.project_id) filtered = filtered.filter(f => f.project_id === Number(params.project_id));
-      return makeResponse(paginate(filtered, params));
+      return makeResponse(paginate(filtered, params || {}));
     }
     if (segments[1] === 'recent' && method === 'GET') {
       return makeResponse([...items].sort((a, b) => (b.created_at || '').localeCompare(a.created_at || '')).slice(0, 10));
@@ -506,11 +506,11 @@ export const backupStore = {
 };
 
 const apiClient = {
-  get: (url: string, config?: any) => route('GET', url, undefined, config?.params),
-  post: (url: string, data?: any, config?: any) => route('POST', url, data, config?.params),
-  put: (url: string, data?: any, config?: any) => route('PUT', url, data, config?.params),
-  patch: (url: string, data?: any, config?: any) => route('PATCH', url, data, config?.params),
-  delete: (url: string, config?: any) => route('DELETE', url, undefined, config?.params),
+  get: <T = any>(url: string, config?: any): Promise<{ data: T; status: number }> => route('GET', url, undefined, config?.params),
+  post: <T = any>(url: string, data?: any, config?: any): Promise<{ data: T; status: number }> => route('POST', url, data, config?.params),
+  put: <T = any>(url: string, data?: any, config?: any): Promise<{ data: T; status: number }> => route('PUT', url, data, config?.params),
+  patch: <T = any>(url: string, data?: any, config?: any): Promise<{ data: T; status: number }> => route('PATCH', url, data, config?.params),
+  delete: <T = any>(url: string, config?: any): Promise<{ data: T; status: number }> => route('DELETE', url, undefined, config?.params),
 };
 
 export default apiClient;

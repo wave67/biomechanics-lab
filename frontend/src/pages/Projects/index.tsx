@@ -115,7 +115,7 @@ const ProjectsListPage: React.FC = () => {
       render: (d: string) => formatDate(d),
     },
     {
-      title: '操作', key: 'action', width: 130, fixed: 'right',
+      title: '操作', key: 'action', width: 130, fixed: 'right' as const,
       render: (_: unknown, record: Project) => (
         <Space>
           <Tooltip title="详情">

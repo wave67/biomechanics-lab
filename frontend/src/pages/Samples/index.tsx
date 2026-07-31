@@ -137,7 +137,7 @@ const SamplesPage: React.FC = () => {
     { title: '入库日期', dataIndex: 'storage_date', key: 'date', width: 100,
       render: (d: string) => d || '-' },
     {
-      title: '操作', key: 'action', width: 130, fixed: 'right',
+      title: '操作', key: 'action', width: 130, fixed: 'right' as const,
       render: (_: unknown, record: ShoeSample) => (
         <Space>
           <Tooltip title="详情"><Button type="link" size="small" icon={<EyeOutlined />} onClick={() => showDetail(record)} /></Tooltip>

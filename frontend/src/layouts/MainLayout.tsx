@@ -4,7 +4,7 @@ import {
   HomeOutlined, CheckSquareOutlined, ExperimentOutlined,
   SkinOutlined, TeamOutlined, FolderOutlined,
   BookOutlined, ToolOutlined, DashboardOutlined,
-  FundOutlined, FileTextOutlined,
+  FundOutlined, FileTextOutlined, SaveOutlined,
 } from '@ant-design/icons';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 

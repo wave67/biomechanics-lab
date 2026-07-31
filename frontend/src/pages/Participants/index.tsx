@@ -71,7 +71,7 @@ const ParticipantsPage: React.FC = () => {
     { title: '体重(kg)', dataIndex: 'weight_kg', key: 'weight', width: 90 },
     { title: '鞋码', dataIndex: 'shoe_size', key: 'shoe_size', width: 60 },
     { title: '创建时间', dataIndex: 'created_at', key: 'created_at', width: 160, render: (d: string) => formatDate(d) },
-    { title: '操作', key: 'action', width: 130, fixed: 'right',
+    { title: '操作', key: 'action', width: 130, fixed: 'right' as const,
       render: (_: unknown, record: Participant) => (
         <Space>
           <Tooltip title="详情"><Button type="link" size="small" icon={<EyeOutlined />} onClick={() => showDetail(record)} /></Tooltip>

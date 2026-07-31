@@ -126,7 +126,7 @@ function stats(values: number[]) {
 
 async function route(method: string, url: string, data?: any, params?: Record<string, any>): Promise<any> {
   // Strip leading /api and trailing slash
-  const clean = url.replace(/^\/?api\/?/, '').replace(/\/$/, '');
+  const clean = url.replace(/^\/?api\/?/, '').replace(/^\/+/, '').replace(/\/$/, '');
 
   // Health
   if (clean === 'health' && method === 'GET') return makeResponse({ status: 'ok', version: '2.0-static' });

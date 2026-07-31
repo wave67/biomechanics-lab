@@ -4,7 +4,7 @@
 
 ## 正式网址
 
-部署完成后将在此处更新正式 HTTPS 地址。
+https://wave67.github.io/biomechanics-lab/
 
 ## 使用的平台
 
@@ -96,3 +96,4 @@ npm run build
 ## 本地开发说明
 
 本项目保留了原 FastAPI 后端代码在 `backend/` 目录中，用于本地完整功能开发。部署到公网的版本不依赖后端，所有页面通过浏览器 localStorage 工作。
+
